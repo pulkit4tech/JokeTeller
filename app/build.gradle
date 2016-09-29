@@ -1,12 +1,15 @@
 apply plugin: 'com.android.application'
 
+targetCompatibility = '1.7'
+sourceCompatibility = '1.7'
+
 android {
     compileSdkVersion 23
     buildToolsVersion "23.0.2"
 
     defaultConfig {
         applicationId "com.example.pulkit4tech.test_joke"
-        minSdkVersion 9
+        minSdkVersion 16
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
@@ -28,6 +31,8 @@ android {
             applicationId "com.example.pulkit4tech.test_joke.paid"
         }
     }
+    targetCompatibility = '1.7'
+    sourceCompatibility = '1.7'
 }
 
 dependencies {
