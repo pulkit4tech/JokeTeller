@@ -1,5 +1,6 @@
-package com.example.pulkit4tech.test_joke.Service;
+package com.example.pulkit4tech.test_joke;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -22,17 +23,25 @@ public class MyAsyncTask extends AsyncTask<Context,Void,String> {
 
     MyApi myApi;
     Context mContext;
+    ProgressDialog Dialog;
 
-    MyAsyncTask (Context mContext){
+    public MyAsyncTask(Context mContext){
         this.mContext = mContext;
+        Dialog = new ProgressDialog(mContext);
         MyApi.Builder builder = new MyApi.Builder(AndroidHttp.newCompatibleTransport(),new AndroidJsonFactory(),null).
-                setRootUrl("http://10.0.2.2:8080/_ah/api/").setGoogleClientRequestInitializer(new GoogleClientRequestInitializer() {
+                setRootUrl("https://joketeller-145006.appspot.com/_ah/api/").setGoogleClientRequestInitializer(new GoogleClientRequestInitializer() {
             @Override
             public void initialize(AbstractGoogleClientRequest<?> abstractGoogleClientRequest) throws IOException {
                 abstractGoogleClientRequest.setDisableGZipContent(true);
             }
         });
         myApi = builder.build();
+    }
+
+    @Override
+    protected void onPreExecute() {
+        Dialog.setMessage("Loading Some best joke ... (maybe)");
+        Dialog.show();
     }
 
     @Override
@@ -47,12 +56,16 @@ public class MyAsyncTask extends AsyncTask<Context,Void,String> {
         catch (Exception e){
             Log.e("ERROR",e.toString());
         }
-        return result;
+        finally {
+            return result;
+        }
+
     }
 
     @Override
     protected void onPostExecute(String result) {
-        Toast.makeText(mContext,"YO !! cheers to the joke",Toast.LENGTH_SHORT).show();
+        Dialog.dismiss();
+        //Toast.makeText(mContext,"YO !! cheers to the joke",Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(mContext, JokeActivity.class);
         intent.putExtra("Jokes",result);
         mContext.startActivity(intent);
