@@ -40,7 +40,7 @@ public class MyAsyncTask extends AsyncTask<Context,Void,String> {
 
     @Override
     protected void onPreExecute() {
-        Dialog.setMessage("Loading Some best joke Users... (ironically)");
+        Dialog.setMessage("Loading Some best joke ... (maybe)");
         Dialog.show();
     }
 
@@ -65,7 +65,7 @@ public class MyAsyncTask extends AsyncTask<Context,Void,String> {
     @Override
     protected void onPostExecute(String result) {
         Dialog.dismiss();
-        Toast.makeText(mContext,"YO !! cheers to the joke",Toast.LENGTH_SHORT).show();
+        //Toast.makeText(mContext,"YO !! cheers to the joke",Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(mContext, JokeActivity.class);
         intent.putExtra("Jokes",result);
         mContext.startActivity(intent);
