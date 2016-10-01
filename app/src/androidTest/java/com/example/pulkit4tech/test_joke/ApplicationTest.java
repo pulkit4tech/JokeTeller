@@ -9,15 +9,9 @@ import com.example.Jokes;
 /**
  * <a href="http://d.android.com/tools/testing/testing_android.html">Testing Fundamentals</a>
  */
-public class ApplicationTest extends ActivityInstrumentationTestCase2<MainActivity> {
-
-
-    public ApplicationTest(){
-        super(MainActivity.class);
-    }
-
-    public void testVerifyAsyncTask(){
-        assertNotNull(new Jokes().getJoke());
+public class ApplicationTest extends ApplicationTestCase<Application> {
+    public ApplicationTest() {
+        super(Application.class);
     }
 
 }
